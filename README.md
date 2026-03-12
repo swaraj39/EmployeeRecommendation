@@ -1,11 +1,9 @@
-### Short Description
+###Employee Recommendation Engine
 
+## Short Description
 The **Employee Recommendation Engine** is a backend system that helps organizations automatically find the most suitable employees for a project. It analyzes employee profiles (skills, experience, availability, and seniority) and compares them with project requirements. The system then calculates a **suitability score**, ranks employees, and provides **clear explanations** for why they are recommended. All functionalities are available through **REST APIs**, making the system scalable and easy to integrate with other applications.
 
----
-
-### Key Features (Simple)
-
+## Key Features (Simple)
 1. **Employee Management**
 
    * Add, update, delete, and view employee profiles.
