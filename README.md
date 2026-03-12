@@ -133,14 +133,14 @@ The **Employee Recommendation Engine** is a backend system that helps organizati
 | project_id | BIGINT | FK → Project(id) | Related project |
 | score | BIGINT | | Suitability score for recommendation |
 
-## 📂 Project Structure
+📂 Project Structure
+
 src
 └── main
     └── java
         └── com
             └── example
                 └── demo
-                    │
                     ├── Controllers
                     │   ├── EmployeeController.java
                     │   ├── FrontController.java
@@ -178,3 +178,6 @@ src
                     │   └── ProjectService.java
                     │
                     └── EmployeeRecommendationApplication.java
+## Recommendation Criteria
+If Skills match then 50 divide by no of skills
+20 for proffiecey also gives begginer 1 intermediate 2 expert 3 
