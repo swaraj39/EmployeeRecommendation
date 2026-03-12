@@ -179,5 +179,18 @@ src
                     │
                     └── EmployeeRecommendationApplication.java
 ## Recommendation Criteria
-If Skills match then 50 divide by no of skills
-20 for proffiecey also gives begginer 1 intermediate 2 expert 3 
+
+| Factor            | Max Score | Description                                                           |
+| ----------------- | --------- | --------------------------------------------------------------------- |
+| Skill Match       | 50        | Checks whether the employee has the required project skills           |
+| Skill Proficiency | 20        | Compares the employee's proficiency level with the required level     |
+| Experience        | 20        | Evaluates whether the employee meets the required years of experience |
+| Availability      | 10        | Checks if the employee is currently available for the project         |
+
+4️⃣ Proficiency Evaluation
+| Condition           | Score Given                |
+| ------------------- | -------------------------- |
+| Exact Match         | 100% of proficiency weight |
+| Employee > Required | 80%                        |
+| Slightly Lower      | 50%                        |
+| Much Lower          | 30%                        |
