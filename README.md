@@ -133,8 +133,9 @@ The **Employee Recommendation Engine** is a backend system that helps organizati
 | project_id | BIGINT | FK → Project(id) | Related project |
 | score | BIGINT | | Suitability score for recommendation |
 
-📂 Project Structure
+## 📂 Project Structure
 
+```text
 src
 └── main
     └── java
@@ -178,6 +179,7 @@ src
                     │   └── ProjectService.java
                     │
                     └── EmployeeRecommendationApplication.java
+```
 ## Recommendation Criteria
 
 | Factor            | Max Score | Description                                                           |
