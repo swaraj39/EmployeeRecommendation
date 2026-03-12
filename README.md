@@ -1,139 +1,176 @@
-###Employee Recommendation Engine
 
-## Short Description
-The **Employee Recommendation Engine** is a backend system that helps organizations automatically find the most suitable employees for a project. It analyzes employee profiles (skills, experience, availability, and seniority) and compares them with project requirements. The system then calculates a **suitability score**, ranks employees, and provides **clear explanations** for why they are recommended. All functionalities are available through **REST APIs**, making the system scalable and easy to integrate with other applications.
+# 🧠 Employee Recommendation Engine
 
-## Key Features (Simple)
-1. **Employee Management**
+## 📌 Short Description
 
-   * Add, update, delete, and view employee profiles.
-   * Store details like skills, experience, availability, and seniority.
+The **Employee Recommendation Engine** is a backend system that helps organizations automatically identify the most suitable employees for a project. It analyzes employee profiles—including **skills, experience, availability, and seniority**—and compares them with **project requirements**.
 
-2. **Project Management**
+The system calculates a **suitability score**, ranks employees accordingly, and provides **clear explanations** for why they are recommended.
 
-   * Create and manage project requirements.
-   * Define required skills, proficiency levels, timelines, and priority.
+All features are exposed through **REST APIs**, making the system **scalable, modular, and easy to integrate** with other enterprise applications.
 
-3. **Employee Search & Filtering**
+---
 
-   * Search employees by skills, experience, availability, or domain expertise.
+# 🚀 Key Features
 
-4. **Smart Employee Recommendation**
+### 1️⃣ Employee Management
 
-   * Automatically finds the best employees for a project.
+* Add, update, delete, and view employee profiles.
+* Store employee details such as **skills, experience, availability, and seniority**.
 
-5. **Suitability Score Calculation**
+### 2️⃣ Project Management
 
-   * Calculates a score based on skill match, experience relevance, and availability.
+* Create and manage project requirements.
+* Define required **skills, proficiency levels, experience, and seniority**.
 
-## 🛠 Technical Stack
+### 3️⃣ Employee Search & Filtering
 
-| Technology | Purpose |
-|------------|---------|
-| Java 17 | Core programming language used to implement the backend logic of the application. |
-| Spring Boot | Framework used to build REST APIs and simplify backend application development. |
-| Maven | Build and dependency management tool used to manage project libraries and build lifecycle. |
-| MySQL | Relational database used to store employee data, project requirements, skills, and recommendations. |
-| JPA (Spring Data JPA) | ORM framework used to map Java entities to database tables and handle database operations. |
-| Lombok | Library used to reduce boilerplate code by automatically generating getters, setters, constructors, and builders. |
-| Swagger (OpenAPI) | API documentation tool used to visualize, test, and document REST endpoints. |
+* Search employees by **skills, experience, availability, or domain expertise**.
 
-## 👨‍💼 Employee Management APIs
+### 4️⃣ Smart Employee Recommendation
 
-| Method | Endpoint | Service Method | Description |
-|-------|---------|---------------|-------------|
-| POST | /api/employees | createEmployee() | Creates a new employee along with their associated skills and proficiency levels. |
-| GET | /api/employees | getAllEmployees() | Retrieves all employees along with their skill records. |
-| GET | /api/employees/grouped | getEmployeeSkillsGrouped() | Fetches all employee skills grouped by employee ID. |
-| GET | /api/employees/{id} | getEmployeeById() | Retrieves details of a specific employee including their associated skills. |
-| PUT | /api/employees/{id} | updateEmployee() | Updates an employee’s details and replaces existing skills with the new skill list. |
-| DELETE | /api/employees/{id} | deleteEmployee() | Deletes an employee and all associated skill records. |
-| GET | /api/employees/search/{name} | searchEmployeeByName() | Searches employees by matching first name or surname. |
+* Automatically identifies the most suitable employees for a project.
 
-## 🧠 Recommendation Engine APIs
+### 5️⃣ Suitability Score Calculation
 
-| Method | Endpoint | Controller Method | Purpose | Description |
-|-------|---------|------------------|--------|-------------|
-| POST | /v2/add/emp | addEmpSkills | Add Employee | Creates a new employee and stores their personal details along with their skills and proficiency levels. |
-| POST | /v2/add/project | addProjectSkills | Add Project | Creates a new project and stores required skills and proficiency levels needed for the project. |
-| POST | /v2/add/requirement/{id} | addRecommendation | Generate Recommendation | Runs the evaluation algorithm to match employees with the specified project and stores recommendation scores. |
-| POST | /v2/add/skill | addSkill | Add Skill | Adds a new skill to the system if it does not already exist in the skills database. |
-| GET | /v2/get/recommendations/{id} | getRecommendations | Get Project Recommendations | Returns a ranked list of employees recommended for the given project based on score, experience, and skill matching. |
+* Calculates a score based on:
 
-## 📂 Project Management APIs
+  * Skill match
+  * Skill proficiency
+  * Experience relevance
+  * Availability
 
-| Method | Endpoint | API Name | Description | Request Body | Response |
-|-------|---------|---------|-------------|-------------|----------|
-| POST | /api/projects | Create Project | Creates a new project and assigns required skills with proficiency levels. | ProjectRequest | Created Project object |
-| GET | /api/projects | Get All Projects | Retrieves a list of all projects available in the system. | None | List of Project |
-| GET | /api/projects/{id} | Get Project By ID | Fetches details of a specific project using its unique ID. | Path variable id | Project object |
-| PUT | /api/projects/{id} | Update Project | Updates project details and replaces its required skills with new ones. | ProjectRequest | Updated Project |
-| DELETE | /api/projects/{id} | Delete Project | Deletes a project from the system using its ID. | Path variable id | Success message |
+---
 
-##🗄 Database Tables
-## 👨‍💼 Employees Table
+# 🛠 Technical Stack
 
-| Column | Type | Key | Description |
-|-------|------|-----|-------------|
-| id | BIGINT | PK | Unique identifier for employee |
-| name | VARCHAR | | Employee first name |
-| surname | VARCHAR | | Employee last name |
-| email | VARCHAR | | Employee email address |
-| phone | BIGINT | | Employee contact number |
-| experience | BIGINT | | Years of experience |
-| avaibility | BOOLEAN | | Employee availability for projects |
-| seniority | VARCHAR | | Seniority level (Junior / Mid / Senior) |
+| Technology            | Purpose                                                            |
+| --------------------- | ------------------------------------------------------------------ |
+| **Java 17**           | Core programming language used for backend development             |
+| **Spring Boot**       | Framework used to build REST APIs and simplify backend development |
+| **Maven**             | Build and dependency management tool                               |
+| **MySQL**             | Relational database used to store application data                 |
+| **Spring Data JPA**   | ORM framework used to map Java entities to database tables         |
+| **Lombok**            | Reduces boilerplate code (getters, setters, constructors)          |
+| **Swagger / OpenAPI** | API documentation and testing tool                                 |
 
-## 🧠 Skills Table
+---
 
-| Column | Type | Key | Description |
-|-------|------|-----|-------------|
-| id | BIGINT | PK | Unique identifier for skill |
-| name | VARCHAR | | Name of the skill |
+# 👨‍💼 Employee Management APIs
 
-## 👨‍💻 EmployeeSkill Table
+| Method | Endpoint                       | Service Method             | Description                                               |
+| ------ | ------------------------------ | -------------------------- | --------------------------------------------------------- |
+| POST   | `/api/employees`               | createEmployee()           | Creates a new employee with skills and proficiency levels |
+| GET    | `/api/employees`               | getAllEmployees()          | Retrieves all employees with their skills                 |
+| GET    | `/api/employees/grouped`       | getEmployeeSkillsGrouped() | Fetches employee skills grouped by employee ID            |
+| GET    | `/api/employees/{id}`          | getEmployeeById()          | Retrieves a specific employee by ID                       |
+| PUT    | `/api/employees/{id}`          | updateEmployee()           | Updates employee details and skill list                   |
+| DELETE | `/api/employees/{id}`          | deleteEmployee()           | Deletes an employee and related skills                    |
+| GET    | `/api/employees/search/{name}` | searchEmployeeByName()     | Searches employees by first name or surname               |
 
-| Column | Type | Key | Description |
-|-------|------|-----|-------------|
-| id | BIGINT | PK | Unique identifier for employee skill |
-| employee_id | BIGINT | FK → Employees(id) | Reference to employee |
-| skill_id | BIGINT | FK → Skills(id) | Reference to skill |
-| proficiency | VARCHAR | | Employee proficiency level |
+---
 
-## 📂 Project Table
+# 🧠 Recommendation Engine APIs
 
-| Column | Type | Key | Description |
-|-------|------|-----|-------------|
-| id | BIGINT | PK | Unique identifier for project |
-| project_name | VARCHAR | | Name of the project |
-| project_description | VARCHAR | | Description of the project |
-| experience | BIGINT | | Required experience |
-| avaibility | BOOLEAN | | Required employee availability |
-| seniority | VARCHAR | | Required seniority level |
-| creation_date | TIMESTAMP | | Project creation date |
-| update_date | TIMESTAMP | | Last updated date |
+| Method | Endpoint                       | Controller Method  | Purpose                     | Description                                                |
+| ------ | ------------------------------ | ------------------ | --------------------------- | ---------------------------------------------------------- |
+| POST   | `/v2/add/emp`                  | addEmpSkills       | Add Employee                | Creates a new employee with skills and proficiency levels  |
+| POST   | `/v2/add/project`              | addProjectSkills   | Add Project                 | Creates a project with required skills                     |
+| POST   | `/v2/add/requirement/{id}`     | addRecommendation  | Generate Recommendation     | Runs evaluation algorithm and stores recommendation scores |
+| POST   | `/v2/add/skill`                | addSkill           | Add Skill                   | Adds a new skill to the system                             |
+| GET    | `/v2/get/recommendations/{id}` | getRecommendations | Get Project Recommendations | Returns ranked employee recommendations                    |
 
-## 🧩 ProjectSkill Table
+---
 
-| Column | Type | Key | Description |
-|-------|------|-----|-------------|
-| id | BIGINT | PK | Unique identifier for project skill |
-| project_id | BIGINT | FK → Project(id) | Reference to project |
-| skill_id | BIGINT | FK → Skills(id) | Reference to skill |
-| required_proficiency | VARCHAR | | Required proficiency level |
+# 📂 Project Management APIs
 
-## ⭐ ProjectRecommendation Table
+| Method | Endpoint             | API Name          | Description                                | Request Body       | Response         |
+| ------ | -------------------- | ----------------- | ------------------------------------------ | ------------------ | ---------------- |
+| POST   | `/api/projects`      | Create Project    | Creates a new project with required skills | ProjectRequest     | Created Project  |
+| GET    | `/api/projects`      | Get All Projects  | Retrieves all projects                     | None               | List of Projects |
+| GET    | `/api/projects/{id}` | Get Project By ID | Retrieves a specific project               | Path Variable `id` | Project Object   |
+| PUT    | `/api/projects/{id}` | Update Project    | Updates project details                    | ProjectRequest     | Updated Project  |
+| DELETE | `/api/projects/{id}` | Delete Project    | Deletes a project                          | Path Variable `id` | Success Message  |
 
-| Column | Type | Key | Description |
-|-------|------|-----|-------------|
-| id | BIGINT | PK | Unique identifier for recommendation |
-| employee_id | BIGINT | FK → Employees(id) | Recommended employee |
-| project_id | BIGINT | FK → Project(id) | Related project |
-| score | BIGINT | | Suitability score for recommendation |
+---
 
-## 📂 Project Structure
+# 🗄 Database Tables
 
-```text
+## Employees
+
+| Column       | Type    | Key | Description           |
+| ------------ | ------- | --- | --------------------- |
+| id           | BIGINT  | PK  | Unique employee ID    |
+| name         | VARCHAR |     | Employee first name   |
+| surname      | VARCHAR |     | Employee last name    |
+| email        | VARCHAR |     | Employee email        |
+| phone        | BIGINT  |     | Contact number        |
+| experience   | BIGINT  |     | Years of experience   |
+| availability | BOOLEAN |     | Employee availability |
+| seniority    | VARCHAR |     | Seniority level       |
+
+---
+
+## Skills
+
+| Column | Type    | Key | Description |
+| ------ | ------- | --- | ----------- |
+| id     | BIGINT  | PK  | Skill ID    |
+| name   | VARCHAR |     | Skill name  |
+
+---
+
+## EmployeeSkill
+
+| Column      | Type    | Key | Description              |
+| ----------- | ------- | --- | ------------------------ |
+| id          | BIGINT  | PK  | Unique employee skill ID |
+| employee_id | BIGINT  | FK  | Reference to Employees   |
+| skill_id    | BIGINT  | FK  | Reference to Skills      |
+| proficiency | VARCHAR |     | Skill proficiency        |
+
+---
+
+## Project
+
+| Column              | Type      | Key | Description           |
+| ------------------- | --------- | --- | --------------------- |
+| id                  | BIGINT    | PK  | Project ID            |
+| project_name        | VARCHAR   |     | Project name          |
+| project_description | VARCHAR   |     | Description           |
+| experience          | BIGINT    |     | Required experience   |
+| availability        | BOOLEAN   |     | Required availability |
+| seniority           | VARCHAR   |     | Required seniority    |
+| creation_date       | TIMESTAMP |     | Created date          |
+| update_date         | TIMESTAMP |     | Last updated date     |
+
+---
+
+## ProjectSkill
+
+| Column               | Type    | Key | Description          |
+| -------------------- | ------- | --- | -------------------- |
+| id                   | BIGINT  | PK  | Project skill ID     |
+| project_id           | BIGINT  | FK  | Reference to Project |
+| skill_id             | BIGINT  | FK  | Reference to Skills  |
+| required_proficiency | VARCHAR |     | Required proficiency |
+
+---
+
+## ProjectRecommendation
+
+| Column      | Type   | Key | Description        |
+| ----------- | ------ | --- | ------------------ |
+| id          | BIGINT | PK  | Recommendation ID  |
+| employee_id | BIGINT | FK  | Employee reference |
+| project_id  | BIGINT | FK  | Project reference  |
+| score       | BIGINT |     | Suitability score  |
+
+---
+
+# 📂 Project Structure
+
+```
 src
 └── main
     └── java
@@ -178,51 +215,67 @@ src
                     │
                     └── EmployeeRecommendationApplication.java
 ```
-## Recommendation Criteria
 
-| Factor            | Max Score | Description                                                           |
-| ----------------- | --------- | --------------------------------------------------------------------- |
-| Skill Match       | 50        | Checks whether the employee has the required project skills           |
-| Skill Proficiency | 20        | Compares the employee's proficiency level with the required level     |
-| Experience        | 20        | Evaluates whether the employee meets the required years of experience |
-| Availability      | 10        | Checks if the employee is currently available for the project         |
+---
 
-## Proficiency Evaluation
-| Condition           | Score Given                |
-| ------------------- | -------------------------- |
-| Exact Match         | 100% of proficiency weight |
-| Employee > Required | 80%                        |
-| Slightly Lower      | 50%                        |
-| Much Lower          | 30%                        |
+# 🧠 Recommendation Criteria
+
+| Factor            | Max Score | Description                                       |
+| ----------------- | --------- | ------------------------------------------------- |
+| Skill Match       | 50        | Employee has required project skills              |
+| Skill Proficiency | 20        | Compares employee skill level with required level |
+| Experience        | 20        | Employee experience vs project requirement        |
+| Availability      | 10        | Employee availability                             |
+
+Total Score = **100**
+
+---
+
+# 📊 Proficiency Evaluation
+
+| Condition           | Score |
+| ------------------- | ----- |
+| Exact Match         | 100%  |
+| Employee > Required | 80%   |
+| Slightly Lower      | 50%   |
+| Much Lower          | 30%   |
+
+---
 
 # ⚙ Setup Instructions
 
-### 1️⃣ Clone the Repository
+## 1️⃣ Clone Repository
 
-``` bash
+```bash
 git clone https://github.com/your-username/employee-recommendation-engine.git
 cd employee-recommendation-engine
 ```
 
-### 2️⃣ Configure Database
+---
 
-Update your database credentials in:
+## 2️⃣ Configure Database
 
-    application.properties
+Edit **application.properties**
 
-Example:
-
-    spring.datasource.url=jdbc:mysql://localhost:3306/your_db
-    spring.datasource.username=root
-    spring.datasource.password=password
-
-### 3️⃣ Run the Application
-
-``` bash
-mvn spring-boot:run
-or
-Run EmployeeRecommendationApplication.java 
+```
+spring.datasource.url=jdbc:mysql://localhost:3306/your_db
+spring.datasource.username=root
+spring.datasource.password=password
 ```
 
-or run the main class in your IDE.
+---
+
+## 3️⃣ Run Application
+
+```
+mvn spring-boot:run
+```
+
+or run
+
+```
+EmployeeRecommendationApplication.java
+```
+
+from your IDE.
 
