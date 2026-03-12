@@ -189,10 +189,42 @@ src
 | Experience        | 20        | Evaluates whether the employee meets the required years of experience |
 | Availability      | 10        | Checks if the employee is currently available for the project         |
 
-4️⃣ Proficiency Evaluation
+## Proficiency Evaluation
 | Condition           | Score Given                |
 | ------------------- | -------------------------- |
 | Exact Match         | 100% of proficiency weight |
 | Employee > Required | 80%                        |
 | Slightly Lower      | 50%                        |
 | Much Lower          | 30%                        |
+
+# ⚙ Setup Instructions
+
+### 1️⃣ Clone the Repository
+
+``` bash
+git clone https://github.com/your-username/employee-recommendation-engine.git
+cd employee-recommendation-engine
+```
+
+### 2️⃣ Configure Database
+
+Update your database credentials in:
+
+    application.properties
+
+Example:
+
+    spring.datasource.url=jdbc:mysql://localhost:3306/your_db
+    spring.datasource.username=root
+    spring.datasource.password=password
+
+### 3️⃣ Run the Application
+
+``` bash
+mvn spring-boot:run
+or
+Run EmployeeRecommendationApplication.java 
+```
+
+or run the main class in your IDE.
+
