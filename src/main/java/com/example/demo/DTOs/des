@@ -1,0 +1,27 @@
+📘 Employee API Documentation
+
+| Method     | Endpoint                       | Service Method               | Description                                                                                                 |
+| ---------- | ------------------------------ | ---------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| **POST**   | `/api/employees`               | `createEmployee()`           | Creates a new employee along with their associated skills and proficiency levels.                           |
+| **GET**    | `/api/employees`               | `getAllEmployees()`          | Retrieves all employees along with their skill records.                                                     |
+| **GET**    | `/api/employees/grouped`       | `getEmployeeSkillsGrouped()` | Fetches all employee skills grouped by employee ID. Useful for displaying skills under each employee.       |
+| **GET**    | `/api/employees/{id}`          | `getEmployeeById()`          | Retrieves details of a specific employee by ID, including their associated skills.                          |
+| **PUT**    | `/api/employees/{id}`          | `updateEmployee()`           | Updates an employee’s details and replaces existing skills with the new skill list provided in the request. |
+| **DELETE** | `/api/employees/{id}`          | `deleteEmployee()`           | Deletes an employee and all associated skill records from the database.                                     |
+| **GET**    | `/api/employees/search/{name}` | `searchEmployeeByName()`     | Searches employees by matching first name or surname with the provided keyword.                             |
+===========================================================
+| API Endpoint                   | Method | Controller Method    | Purpose                     | Description                                                                                                          |
+| ------------------------------ | ------ | -------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `/v2/add/emp`                  | POST   | `addEmpSkills`       | Add Employee                | Creates a new employee and stores their personal details along with their skills and proficiency levels.             |
+| `/v2/add/project`              | POST   | `addProjectSkills`   | Add Project                 | Creates a new project and stores required skills and proficiency levels needed for the project.                      |
+| `/v2/add/requirement/{id}`     | POST   | `addRecommendation`  | Generate Recommendation     | Runs the evaluation algorithm to match employees with the specified project and stores recommendation scores.        |
+| `/v2/add/skill`                | POST   | `addSkill`           | Add Skill                   | Adds a new skill to the system if it does not already exist in the skills database.                                  |
+| `/v2/get/recommendations/{id}` | GET    | `getRecommendations` | Get Project Recommendations | Returns a ranked list of employees recommended for the given project based on score, experience, and skill matching. |
+======================================================
+| Method | Endpoint             | API Name          | Description                                                                | Request Body                                     | Response                 |
+| ------ | -------------------- | ----------------- | -------------------------------------------------------------------------- | ------------------------------------------------ | ------------------------ |
+| POST   | `/api/projects`      | Create Project    | Creates a new project and assigns required skills with proficiency levels. | `ProjectRequest` (project details + skills list) | Created `Project` object |
+| GET    | `/api/projects`      | Get All Projects  | Retrieves a list of all projects available in the system.                  | None                                             | List of `Project`        |
+| GET    | `/api/projects/{id}` | Get Project By ID | Fetches details of a specific project using its unique ID.                 | Path Variable `id`                               | `Project` object         |
+| PUT    | `/api/projects/{id}` | Update Project    | Updates project details and replaces its required skills with new ones.    | `ProjectRequest`                                 | Updated `Project`        |
+| DELETE | `/api/projects/{id}` | Delete Project    | Deletes a project from the system using its ID.                            | Path Variable `id`                               | Success message          |
