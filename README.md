@@ -279,3 +279,16 @@ EmployeeRecommendationApplication.java
 
 from your IDE.
 
+---
+
+## 3️⃣ Run Swagger UI
+
+Run the project and hit the url 
+
+```
+http://localhost:8090/swagger-ui/index.html#
+```
+
+
+from your IDE.
+
