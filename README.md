@@ -247,7 +247,7 @@ Total Score = **100**
 ## 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/your-username/employee-recommendation-engine.git
+git clone https://github.com/swaraj39/employee-recommendation-engine.git
 cd employee-recommendation-engine
 ```
 
