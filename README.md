@@ -281,7 +281,7 @@ from your IDE.
 
 ---
 
-## 3️⃣ Run Swagger UI
+## 4️⃣ Run Swagger UI
 
 Run the project and hit the url 
 
