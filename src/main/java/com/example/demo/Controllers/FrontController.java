@@ -25,7 +25,7 @@ public class FrontController {
             summary = "Add Employee",
             description = "Creates a new employee and stores their skills with proficiency levels"
     )
-    @PostMapping("/add/emp")
+    @PostMapping("/api/emp")
     public ResponseEntity<?> addEmpSkills(@RequestBody EmployeeRequest request) {
         return ResponseEntity.ok(frontService.addEmpSkills(request));
     }
@@ -34,7 +34,7 @@ public class FrontController {
             summary = "Add Project",
             description = "Creates a new project and defines required skills and proficiency levels"
     )
-    @PostMapping("/add/project")
+    @PostMapping("/api/project")
     public ResponseEntity<?> addProjectSkills(@RequestBody ProjectRequest request) {
         return ResponseEntity.ok(frontService.addProjectSkills(request));
     }
@@ -43,7 +43,7 @@ public class FrontController {
             summary = "Generate Recommendation",
             description = "Evaluates employees and generates recommendations for the given project"
     )
-    @PostMapping("/add/requirement/{id}")
+    @PostMapping("/api/requirement/{id}")
     public ResponseEntity<?> addRecommendation(@PathVariable Long id) {
         frontService.generateRecommendation(id);
         return ResponseEntity.ok().build();
@@ -53,7 +53,7 @@ public class FrontController {
             summary = "Add Skill",
             description = "Adds a new skill to the system if it does not already exist"
     )
-    @PostMapping("/add/skill")
+    @PostMapping("/api/skill")
     public ResponseEntity<?> addSkill(@RequestBody Skills request) {
         return ResponseEntity.ok(frontService.addSkill(request));
     }
@@ -62,7 +62,7 @@ public class FrontController {
             summary = "Get Project Recommendations",
             description = "Returns ranked employees recommended for a project"
     )
-    @GetMapping("/get/recommendations/{id}")
+    @GetMapping("/api/recommendations/{id}")
     public ResponseEntity<List<EMPReommendDTO>> getRecommendations(@PathVariable Long id) {
         return ResponseEntity.ok(frontService.getRecommendations(id));
     }

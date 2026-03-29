@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +30,12 @@ public class ProjectController {
         return projectService.createProject(request);
     }
 
+
+    @PostMapping("/all")
+    public ResponseEntity<?> createMultipleProjects(@RequestBody List<ProjectRequest> requests) {
+        // projectService.createMultipleProjects(requests);
+        return ResponseEntity.ok().build();
+    }
     @Operation(
             summary = "Get All Projects",
             description = "Returns a list of all available projects"
