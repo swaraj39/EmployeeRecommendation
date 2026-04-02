@@ -36,6 +36,9 @@ public class Employees {
     @NotNull
     private String seniority;
 
+    @OneToOne(mappedBy = "employee")
+    private Users user;
+
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<EmployeeSkill> employeeSkills;

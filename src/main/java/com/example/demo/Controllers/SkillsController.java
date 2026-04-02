@@ -21,15 +21,24 @@ public class SkillsController {
     }
 
     @PostMapping("/api/skills")
-    public ResponseEntity<List<Skills>> addSkills(@RequestBody List<Skills> skills) {
+public ResponseEntity<List<Skills>> addSkills(@RequestBody List<String> skills) {
+
     if (skills == null || skills.isEmpty()) {
         return ResponseEntity.badRequest().build();
     }
 
-    List<Skills> savedSkills = skillsRepo.saveAll(skills);
+    List<Skills> skillEntities = skills.stream()
+        .map(name -> {
+            Skills s = new Skills();
+            s.setName(name);
+            return s;
+        })
+        .toList();
+
+    List<Skills> savedSkills = skillsRepo.saveAll(skillEntities);
+
     return ResponseEntity.ok(savedSkills);
 }
-
     @GetMapping("/get/skills")
     public List<Skills> getSkills(){
         return skillsRepo.findAll();

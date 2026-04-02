@@ -1,5 +1,6 @@
 package com.example.demo.Controllers;
 
+import com.example.demo.Annotations.RoleRequired;
 import com.example.demo.DTOs.EmployeeRequest;
 import com.example.demo.Models.EmployeeSkill;
 import com.example.demo.Models.Employees;
@@ -35,6 +36,7 @@ public class EmployeeController {
             description = "Fetch all employees with their skills"
     )
     @GetMapping
+    @RoleRequired(role = "ROLE_ADMIN")
     public ResponseEntity<List<EmployeeSkill>> getAllEmployees() {
         return ResponseEntity.ok(employeeService.getAllEmployees());
     }

@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class ProjectController {
 
 
     @PostMapping("/all")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> createMultipleProjects(@RequestBody List<ProjectRequest> requests) {
         // projectService.createMultipleProjects(requests);
         return ResponseEntity.ok().build();
@@ -41,6 +43,7 @@ public class ProjectController {
             description = "Returns a list of all available projects"
     )
     @GetMapping
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public List<Project> getAllProjects() {
         return projectService.getAllProjects();
     }
