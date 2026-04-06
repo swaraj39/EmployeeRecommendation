@@ -1,23 +1,29 @@
 package com.example.demo.Config;
 
+import com.example.demo.LoginService.LoginServiceCheck;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.List;
 
+@Component
 public class JwtFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
+    private final LoginServiceCheck loginServiceCheck;
 
-    public JwtFilter(JwtUtil jwtUtil) {
+    public JwtFilter(JwtUtil jwtUtil, LoginServiceCheck loginServiceCheck) {
         this.jwtUtil = jwtUtil;
+        this.loginServiceCheck = loginServiceCheck;
     }
 
     @Override
@@ -34,7 +40,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
             try {
                 String token = header.substring(7);
-
+                String method = request.getMethod();
                 Claims claims = jwtUtil.getClaims(token);
 
                 String username = claims.getSubject();
@@ -42,7 +48,11 @@ public class JwtFilter extends OncePerRequestFilter {
 
                 System.out.println("USERNAME: " + username);
                 System.out.println("ROLE: " + role);
-
+                if(!loginServiceCheck.isAllowed(method, role)){
+                    response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                    response.getWriter().write("Access Denied");
+                    return;
+                }
                 SimpleGrantedAuthority authority =
                         new SimpleGrantedAuthority("ROLE_" + role);
                 System.out.println(authority);

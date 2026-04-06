@@ -43,7 +43,7 @@ public class ProjectController {
             description = "Returns a list of all available projects"
     )
     @GetMapping
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public List<Project> getAllProjects() {
         return projectService.getAllProjects();
     }
