@@ -2,9 +2,14 @@ package com.example.demo.Controllers;
 
 import com.example.demo.Config.JwtUtil;
 import com.example.demo.DTOs.EmployeeLogin;
+import com.example.demo.DTOs.EmployeeRegisterRequest;
+import com.example.demo.DTOs.SkillProficiency;
 import com.example.demo.Enums.Role;
+import com.example.demo.Models.EmployeeSkill;
 import com.example.demo.Models.Employees;
 import com.example.demo.Models.Users;
+import com.example.demo.Repository.EmployeeSkillRepo;
+import com.example.demo.Repository.SkillsRepo;
 import com.example.demo.Repository.UserRepo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,15 +31,19 @@ public class SecurityController {
     private final PasswordEncoder passwordEncoder;
     private final UserRepo userRepo;
     private final JwtUtil jwtUtil;
+    private final SkillsRepo  skillRepo;
+    private final EmployeeSkillRepo employeeSkillRepo;
 
-    public SecurityController(PasswordEncoder passwordEncoder, UserRepo userRepo, JwtUtil jwtUtil) {
+    public SecurityController(PasswordEncoder passwordEncoder, UserRepo userRepo, JwtUtil jwtUtil, SkillsRepo skillsRepo, EmployeeSkillRepo employeeSkillRepo) {
         this.passwordEncoder = passwordEncoder;
         this.userRepo = userRepo;
         this.jwtUtil = jwtUtil;
+        this.skillRepo = skillsRepo;
+        this.employeeSkillRepo = employeeSkillRepo;
     }
 
     @PostMapping("/api/user")
-    public ResponseEntity<?> register(@RequestBody EmployeeLogin dto) {
+    public ResponseEntity<?> register(@RequestBody EmployeeRegisterRequest dto) {
 
         // ✅ Create Employee
         Employees emp = Employees.builder()
@@ -43,7 +52,7 @@ public class SecurityController {
                 .email(dto.getEmail())
                 .phone(dto.getPhone())
                 .experience(dto.getExperience())
-                .avaibility(dto.isAvaibility())
+                .avaibility(dto.isAvailability())
                 .seniority(dto.getSeniority())
                 .build();
 
@@ -55,11 +64,21 @@ public class SecurityController {
                 .employee(emp)
                 .build();
 
-        // 🔗 Set reverse mapping (VERY IMPORTANT)
         emp.setUser(user);
 
-        // 💾 Save (cascade handles employee)
+        // 💾 Save user + employee
         userRepo.save(user);
+
+        // ✅ Save skills
+        if (dto.getSkills() != null) {
+            for (SkillProficiency sp : dto.getSkills()) {
+                EmployeeSkill es = new EmployeeSkill();
+                es.setEmployee(emp);
+                es.setSkill(skillRepo.findById(sp.getSkillId()).orElseThrow());
+                es.setProficiency(sp.getProficiency());
+                employeeSkillRepo.save(es);
+            }
+        }
 
         return ResponseEntity.ok(user);
     }
