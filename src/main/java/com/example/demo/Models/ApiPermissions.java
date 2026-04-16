@@ -21,4 +21,5 @@ public class ApiPermissions {
     private String methodname;
     @Column(nullable = false)
     private String rolename;
+    private String endpoint;
 }

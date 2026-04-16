@@ -4,6 +4,7 @@ import com.example.demo.DTOs.ProjectRequest;
 import com.example.demo.Models.Project;
 import com.example.demo.Services.ProjectService;
 
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -44,8 +45,14 @@ public class ProjectController {
     )
     @GetMapping
 //    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @RateLimiter(name = "apiLimiter")
     public List<Project> getAllProjects() {
-        return projectService.getAllProjects();
+        try {
+            return projectService.getAllProjects();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @Operation(

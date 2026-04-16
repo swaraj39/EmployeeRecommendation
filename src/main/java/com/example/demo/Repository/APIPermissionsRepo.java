@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface APIPermissionsRepo extends JpaRepository<ApiPermissions, Long> {
     List<ApiPermissions> findByMethodname(String methodname);
+
+    List<ApiPermissions> findByRolename(String role);
 }
