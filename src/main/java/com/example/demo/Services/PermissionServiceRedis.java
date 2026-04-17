@@ -18,7 +18,7 @@ public class PermissionServiceRedis {
 
     @Cacheable(value = "permissions", key = "#role")
     public List<ApiPermissions> getPermissionsByRole(String role) {
-        System.out.println("🔥 DB HIT FOR PERMISSIONS");
+        System.out.println("🔥 DB HIT PERMISSIONS");
         return repo.findByRolename(role);
     }
 }
