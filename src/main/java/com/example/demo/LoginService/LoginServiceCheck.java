@@ -24,6 +24,17 @@ public class LoginServiceCheck {
 
     public boolean isAllowed(String method, String role, String uri) {
 
+        // 🔥 normalize URI (same fix as filter)
+        if (uri.startsWith("/api")) {
+            uri = uri.substring(4);
+        }
+
+        if (uri.endsWith("/")) {
+            uri = uri.substring(0, uri.length() - 1);
+        }
+
+        uri = uri.toLowerCase();
+
         List<ApiPermissions> permissions = permissionServiceRedis.getPermissionsByRole(role);
         System.out.println(permissions);
 
@@ -31,8 +42,10 @@ public class LoginServiceCheck {
 
             boolean methodMatch =
                     p.getMethodname().equalsIgnoreCase(method);
+
             boolean endpointMatch =
-                    uri.toLowerCase().contains(p.getEndpoint().toLowerCase());
+                    uri.startsWith(p.getEndpoint().toLowerCase());  // ✅ FIXED
+
             if (methodMatch && endpointMatch) {
                 return true;
             }

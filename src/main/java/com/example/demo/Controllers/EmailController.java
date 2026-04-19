@@ -16,7 +16,7 @@ import java.util.Map;
 @Slf4j
 public class EmailController {
 
-    @GetMapping("/email/api")
+    @GetMapping("/api/email")
     public ResponseEntity<?> getEmailApi() {
         String webhookUrl = "https://webhooks.workato.com/webhooks/rest/6ae3b894-92be-458a-85e3-6fd8e0c20ed6/email-service";
 
