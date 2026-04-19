@@ -2,6 +2,7 @@ package com.example.demo.Services;
 
 import com.example.demo.Models.ApiPermissions;
 import com.example.demo.Repository.APIPermissionsRepo;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +21,10 @@ public class PermissionServiceRedis {
     public List<ApiPermissions> getPermissionsByRole(String role) {
         System.out.println("🔥 DB HIT PERMISSIONS");
         return repo.findByRolename(role);
+    }
+
+    @CacheEvict(value = "permissions", allEntries = true)
+    public void clearPermissionCache() {
+        System.out.println("🔥 Redis cache cleared");
     }
 }
