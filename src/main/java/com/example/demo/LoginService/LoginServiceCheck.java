@@ -24,11 +24,7 @@ public class LoginServiceCheck {
 
     public boolean isAllowed(String method, String role, String uri) {
 
-        // 🔥 normalize URI (same fix as filter)
-        if (uri.startsWith("/api")) {
-            uri = uri.substring(4);
-        }
-
+        // ✅ normalize only (NO /api removal now)
         if (uri.endsWith("/")) {
             uri = uri.substring(0, uri.length() - 1);
         }
@@ -44,7 +40,7 @@ public class LoginServiceCheck {
                     p.getMethodname().equalsIgnoreCase(method);
 
             boolean endpointMatch =
-                    uri.startsWith(p.getEndpoint().toLowerCase());  // ✅ FIXED
+                    uri.startsWith(p.getEndpoint().toLowerCase());  // ✅ correct
 
             if (methodMatch && endpointMatch) {
                 return true;
