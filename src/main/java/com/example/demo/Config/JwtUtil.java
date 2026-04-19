@@ -13,9 +13,13 @@ public class JwtUtil {
     private final String SECRET = "K9fT2mX8qLrV4zYp1cWd7sBn3hGj6QeU0tRa5kLmN2c="; // min 32 chars
     private final Key key = Keys.hmacShaKeyFor(SECRET.getBytes());
 
+
+
+
     public String generateToken(String username, String role) {
         return Jwts.builder()
                 .setSubject(username)
+                .setIssuer("my-client-id")
                 .claim("role",role)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 1 hour
