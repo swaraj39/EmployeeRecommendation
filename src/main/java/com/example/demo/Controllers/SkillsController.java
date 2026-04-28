@@ -4,11 +4,7 @@ import java.util.List;
 
 import com.example.demo.Services.PermissionServiceRedis;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.Models.Skills;
 import com.example.demo.Repository.SkillsRepo;
@@ -22,6 +18,12 @@ public class SkillsController {
     public SkillsController(SkillsRepo skillsRepo, PermissionServiceRedis permissionServiceRedis) {
         this.skillsRepo = skillsRepo;
         this.permissionServiceRedis = permissionServiceRedis;
+    }
+
+    @DeleteMapping("/api/skills/{id}")
+    public ResponseEntity<Skills> deleteSkill(@PathVariable Long id) {
+        skillsRepo.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/api/skills")
@@ -55,7 +57,7 @@ public ResponseEntity<List<Skills>> addSkills(@RequestBody List<String> skills) 
 
     @GetMapping("/clear-cache")
     public String clearCache() {
-        permissionServiceRedis.clearPermissionCache();
+//        permissionServiceRedis.();
         return "Cache cleared!";
     }
 

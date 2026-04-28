@@ -77,7 +77,10 @@ public class EmployeeService {
                 .orElseThrow(() -> new RuntimeException("Employee not found"));
 
         List<EmployeeSkill> skills = employeeSkillRepo.findByEmployeeId(id);
-
+        boolean b = getEmployee(emp.getName());
+        if (!b) {
+            throw new RuntimeException("Employee not found");
+        }
         Map<String, Object> response = new HashMap<>();
         response.put("employee", emp);
         response.put("skills", skills);
@@ -140,5 +143,12 @@ public class EmployeeService {
                 .filter(e -> e.getName().toLowerCase().contains(name.toLowerCase())
                         || e.getSurname().toLowerCase().contains(name.toLowerCase()))
                 .toList();
+    }
+
+    private boolean getEmployee(String name){
+        if (name == null || name.isEmpty()) {
+            throw new RuntimeException("Name cannot be empty");
+        }
+        return true;
     }
 }

@@ -23,8 +23,8 @@ public class PermissionServiceRedis {
         return repo.findByRolename(role);
     }
 
-    @CacheEvict(value = "permissions", allEntries = true)
-    public void clearPermissionCache() {
-        System.out.println("🔥 Redis cache cleared");
+    @CacheEvict(value = "permissions", key = "#role")
+    public void clearPermissionCacheByRole(String role) {
+        System.out.println("🔥 Cleared cache for role: " + role);
     }
 }

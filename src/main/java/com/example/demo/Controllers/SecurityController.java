@@ -11,6 +11,7 @@ import com.example.demo.Models.Users;
 import com.example.demo.Repository.EmployeeSkillRepo;
 import com.example.demo.Repository.SkillsRepo;
 import com.example.demo.Repository.UserRepo;
+import com.example.demo.Services.PermissionServiceRedis;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,13 +29,15 @@ import java.util.Map;
 public class SecurityController {
 
 
+    private final PermissionServiceRedis  permissionServiceRedis;
     private final PasswordEncoder passwordEncoder;
     private final UserRepo userRepo;
     private final JwtUtil jwtUtil;
     private final SkillsRepo  skillRepo;
     private final EmployeeSkillRepo employeeSkillRepo;
 
-    public SecurityController(PasswordEncoder passwordEncoder, UserRepo userRepo, JwtUtil jwtUtil, SkillsRepo skillsRepo, EmployeeSkillRepo employeeSkillRepo) {
+    public SecurityController(PermissionServiceRedis permissionServiceRedis, PasswordEncoder passwordEncoder, UserRepo userRepo, JwtUtil jwtUtil, SkillsRepo skillsRepo, EmployeeSkillRepo employeeSkillRepo) {
+        this.permissionServiceRedis = permissionServiceRedis;
         this.passwordEncoder = passwordEncoder;
         this.userRepo = userRepo;
         this.jwtUtil = jwtUtil;
@@ -102,6 +105,7 @@ public class SecurityController {
 
 //        return ResponseEntity.ok(Map.of("token", token));
         String s = jwtUtil.generateToken(username, String.valueOf(userRepo.findByUsername(username).get().getRole()));
+        permissionServiceRedis.clearPermissionCacheByRole( String.valueOf(userRepo.findByUsername(username).get().getRole()));
         return ResponseEntity.ok(s);
     }
 
